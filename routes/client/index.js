@@ -16,7 +16,8 @@ router.get("/", (req, res) => {
   const initData = {
     countVisit: req.session.countVisit,
     firstTime: req.session.firstTime,
-    user: req.session.user ? req.session.user : ""
+    user: req.session.user ? req.session.user : "",
+    errorData: req.session.errorData ? req.session.errorData : ""
   };
 
   res.render("landing", initData);

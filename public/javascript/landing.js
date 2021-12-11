@@ -4,8 +4,8 @@ document.querySelector("#createAcc").addEventListener("submit", (e) => {
 });
 
 const createUser = async (username, email, password) => {
-  const test = await axios.post("api/user/create", {username, email, password});
-  console.log(test.data);
+  const newUser = await axios.post("api/user/create", {username, email, password});
+  console.log(newUser.data);
 
   //   await axios.post("api/user/create", { username, email, password });
 

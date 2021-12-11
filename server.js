@@ -2,7 +2,7 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
 const session = require(`express-session`);
-// const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const sequelize = require("./config/connection");
 /*
 
@@ -29,11 +29,11 @@ app.set("view engine", "handlebars");
 */
 // =============================================================
 // Set up the store
-// const store = new SequelizeStore({
-//   db: sequelize,
-//   checkExpirationInterval:  5 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
-//   expiration: 15 * 60 * 1000, // The maximum age (in milliseconds) of a valid session. (ONE DAY = 24 * 60 * 60 * 1000)
-// });
+const store = new SequelizeStore({
+  db: sequelize,
+  checkExpirationInterval:  5 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
+  expiration: 15 * 60 * 1000, // The maximum age (in milliseconds) of a valid session. (ONE DAY = 24 * 60 * 60 * 1000)
+});
 /*
 
 
@@ -44,7 +44,7 @@ app.set("view engine", "handlebars");
 app.use(
   session({
     secret: "mySecret",
-    // store: store,
+    store: store,
     resave: false,
     saveUninitialized: false,
   })

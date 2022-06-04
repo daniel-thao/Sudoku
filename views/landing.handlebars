@@ -1,22 +1,14 @@
-<h1>Hello World</h1>
+<div class="relative">
+    {{#if user}}
+        {{user}}
 
-<h3>{{countVisit}}</h3>
-<h3>{{firstTime}}</h3>
-<h3>{{user}}</h3>
-
-<h1>{{errorData.createAcc}}</h1>
-
-<form id="createAcc">
-  <label for="username">Username</label><br />
-  <input type="text" id="username" name="username" /><br />
-
-  <label for="email">Email</label><br />
-  <input type="text" id="email" name="email" /><br />
-
-  <label for="password">Password</label><br />
-  <input type="text" id="password" name="password" /><br /><br />
-
-  <input type="submit" value="Create" />
-</form>
-
-<script src="./javascript/landing.js"></script>
+        {{#if sudoku}}
+            {{> sudoku puzzle=sudoku}}
+        {{/if}}
+    {{!-- This is actually confusing in terms of color coding tbh, but the second part is the parameter --}}
+    {{!-- There is no way to render portions of a parent template, in this case --> landing.handlebars --}}
+        {{> homepage user=user allPuzzles=allPuzzles}}
+    {{else}}
+        {{> auth errorData=errorData}}
+    {{/if}}
+</div>

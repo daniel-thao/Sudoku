@@ -84,7 +84,7 @@ app.use(require("./routes"));
 async function dbSync() {
   // REMOVE THIS FORCE TRUE ON OFFICIAL DEPLOYMENT PROD
   // {force: true}
-  return await sequelize.sync({force: true});
+  return await sequelize.sync();
 }
 dbSync();
 /*

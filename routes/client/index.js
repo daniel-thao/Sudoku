@@ -1,8 +1,7 @@
 const router = require("express").Router();
-
+const { sudoku } = require("../api/controller");
 
 router.get("/", (req, res) => {
-
   if (req.session.countVisit) {
     // If the 'countVisit' session variable exists, increment it by 1 and set the 'firstTime' session variable to 'false'
     req.session.countVisit++;
@@ -16,11 +15,27 @@ router.get("/", (req, res) => {
   const initData = {
     countVisit: req.session.countVisit,
     firstTime: req.session.firstTime,
+    allPuzzles: req.session.allPuzzles ? req.session.allPuzzles : "",
     user: req.session.user ? req.session.user : "",
-    errorData: req.session.errorData ? req.session.errorData : ""
+    errorData: req.session.errorData ? req.session.errorData : "",
   };
 
   res.render("landing", initData);
 });
 
-module.exports = router
+router.get("/:id", async (req, res) => {
+  await sudoku.findOne(req, res);
+  // console.log(req.session.sudoku);
+
+  const initData = {
+    user: req.session.user ? req.session.user : false,
+    allPuzzles: req.session.allPuzzles ? req.session.allPuzzles : "",
+    sudoku: req.session.sudoku ? req.session.sudoku : "",
+    errorData: req.session.errorData,
+  };
+
+  // console.log(req.session.id)
+  res.render("landing", initData);
+});
+
+module.exports = router;

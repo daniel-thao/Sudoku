@@ -33,7 +33,7 @@ const findOne = async (req, res) => {
   console.log(await db.Sudokus.findAll());
   const puzzle = await db.Sudokus.findOne({where: {id: req.params.id}})
   console.log(puzzle);
-  req.session.sudoku = puzzle.dataValues.startPoint
+  // req.session.sudoku = puzzle.dataValues.startPoint
   // console.log(puzzle.dataValues.startPoint);
   return puzzle;
 }
